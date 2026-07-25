@@ -13,7 +13,7 @@ load_dotenv()
 llm = ChatOpenAI(model="gpt-4o-mini", api_key=os.getenv("OPENAI_API_KEY"))
 stdio_server_params = StdioServerParameters(
     command="python",
-    args=["/Users/michael/projects/mcp-langchain-adapters/servers/math_server.py"]
+    args=["/Users/michael/projects/mcp-langchain-adapters/servers/math_server.py"],
 )
 
 
@@ -26,7 +26,9 @@ async def main():
             print(tools)
 
             agent = create_agent(llm, tools)
-            result = await agent.invoke({"messages": [HumanMessage(content="What is 54 + 2 * 3?")]})
+            result = await agent.invoke(
+                {"messages": [HumanMessage(content="What is 54 + 2 * 3?")]}
+            )
             print(result["messages"][-1].content)
 
 
